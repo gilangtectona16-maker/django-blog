@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+    <div class="container my-5" style="max-width: 1000px;">
+        <!-- Headline Besar (mirip Kompas) -->
+        <div class="mb-5 text-center">
+            <h1 class="display-5 fw-bold text-primary">PORTAL BERITA NASIONAL</h1>
+            <p class="lead text-muted">Berita Terkini dan Terpercaya ~ Update 5 Januari 2026</p>
+            <hr class="my-4">
+        </div>
+        
+        <div class="row row-cols-2">
+            <div class="col-sm-8">
+                <!-- Breaking News / Headline Utama -->
+                <div class="card mb-5 border-0 shadow-sm">
+                    <div class="row">
+                        {% if object.featured_image and object.featured_image2 %}
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <img src="{{ object.featured_image.url }}" alt="{{ object.title }}" class="img-fluid mb-4 rounded shadow">
+                            </div>
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <img src="{{ object.featured_image2.url }}" alt="{{ object.title }}" class="img-fluid mb-4 rounded shadow">
+                            </div>
+                        {% elif object.featured_image or object.featured_image2 %}
+                            <div class="col-sm-12 mb-3 mb-sm-0">
+                                <img src="
+                                {% if object.featured_image %}
+                                    {{ object.featured_image.url }}
+                                {% elif object.featured_image2 %}
+                                    {{ object.featured_image2.url }}
+                                {% endif %}
+                                " alt="{{ object.title }}" class="img-fluid mb-4 rounded shadow" style="width: auto; height: auto;">
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <span class="badge bg-danger mb-2">BREAKING</span>
+                        <h2 class="card-title fw-bold">{{ object.title }}</h2>
+                        <p class="text-muted small">{{ object.created_date|date:"d M Y H:i" }} • Diupdate: {{ object.updated_date|date:"d M Y H:i" }}</p>
+                        <p class="card-text">{{ object.content|linebreaks }}</p>
+                    </div>
+                    <a href="{% url 'post_list' %}" class="btn btn-secondary">Kembali ke Daftar</a>
+                    <a href="{% url 'post_update' object.slug %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'post_delete' object.slug %}" class="btn btn-danger">Hapus</a>
+                </div>
+
+                    <!-- Tambah sendiri berita lain di sini ya, copy blok card aja! -->
+                    <!-- Contoh Berita 4-7 bisa pakai gambar dari inspirasi tadi -->
+
+                </div>
+                <div class="col-sm-4">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, natus.
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer kecil -->
+        <footer class="text-center mt-5 pt-4 border-top fixed-bottom">
+            <p class="text-muted small">© 2026 Portal Berita Ku ~ Dibuat dengan Django & Bootstrap ♡</p>
+        </footer>
+    </div>    
+{% endblock %}

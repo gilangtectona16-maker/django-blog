@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center mb-5">Portal Berita Ku ~ Update Terkini</h1>
+
+  <a href="{% url 'post_create' %}" class="btn btn-success mb-4">+ Tambah Berita Baru</a>
+
+  <div class="row row-cols-4">
+    {% for post in posts %}
+      <div class="col">
+        <div class="card mb-4 border-0 shadow-sm">
+          <div class="card-body">
+            <h4 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+            {% if post.thumbnail %}
+                <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+            {% else %}
+                <img src="https://via.placeholder.com/400x200?text=No+Image" class="card-img-top" alt="No Image">
+            {% endif %}
+            <p class="text-muted small">{{ post.created_date|date:'d M Y H:i' }}</p>
+            <p class="card-text">{{ post.content|truncatewords:50 }}</p>
+            <a href="{% url 'post_detail' unique_id=post.unique_id %}" class="btn btn-primary btn-sm">Selengkapnya</a>
+            <a href="{% url 'post_update' post.slug %}" class="btn btn-warning btn-sm">Edit</a>
+            <form method="post" action="{% url 'post_delete' post.slug %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger btn-sm" data-url="{% url 'post_delete' post.slug %}" data-title="{{ post.title }}">Hapus</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-center">Belum ada berita nih... yuk tambah dulu~ (≧◡≦)</p>
+    {% endfor %}
+  </div>
+{% endblock %}
