@@ -1,3 +1,0 @@
-kalau mau jalankan kode, install python env dahulu:
-
-`python -m env *nama env mu*`

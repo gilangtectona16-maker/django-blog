@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from blog.views import PostListView, PostDetailView
+from blog.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +25,5 @@ urlpatterns = [
     path('', include('blog.urls')),
     
     # Public: detail berita langsung slug di root
-    path('<str:unique_id>/', PostDetailView.as_view(), name='post_detail'),
+    # path('<str:unique_id>/', PostDetailView.as_view(), name='post_detail'),
 ]

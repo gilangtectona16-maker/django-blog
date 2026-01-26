@@ -1,48 +1,40 @@
 {% extends 'base.html' %}
 
 {% load static %}
-{% block content %}
-    <div class="container my-5" style="max-width: 1000px;">
-        <!-- Headline Besar (mirip Kompas) -->
-        <div class="mb-5 text-center">
-            <h1 class="display-5 fw-bold text-primary">PORTAL BERITA NASIONAL</h1>
-            <p class="lead text-muted">Berita Terkini dan Terpercaya ~ Update 5 Januari 2026</p>
-            <hr class="my-4">
-        </div>
-        
+{% block content %}    
         <div class="row row-cols-2">
             <div class="col-sm-8">
                 <!-- Breaking News / Headline Utama -->
                 <div class="card mb-5 border-0 shadow-sm">
                     <div class="row">
-                        {% if object.featured_image and object.featured_image2 %}
+                        {% if post.thumbnail_url and post.featured_image_url %}
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                <img src="{{ object.featured_image.url }}" alt="{{ object.title }}" class="img-fluid mb-4 rounded shadow">
+                                <img src="{{ post.thumbnail_url }}" alt="{{ post.title }}" class="img-fluid mb-4 rounded shadow">
                             </div>
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                <img src="{{ object.featured_image2.url }}" alt="{{ object.title }}" class="img-fluid mb-4 rounded shadow">
+                                <img src="{{ post.featured_image_url }}" alt="{{ post.title }}" class="img-fluid mb-4 rounded shadow">
                             </div>
-                        {% elif object.featured_image or object.featured_image2 %}
+                        {% elif post.thumbnail_url or post.featured_image_url %}
                             <div class="col-sm-12 mb-3 mb-sm-0">
                                 <img src="
-                                {% if object.featured_image %}
-                                    {{ object.featured_image.url }}
-                                {% elif object.featured_image2 %}
-                                    {{ object.featured_image2.url }}
+                                {% if post.thumbnail_url %}
+                                    {{ post.thumbnail_url }}
+                                {% elif post.featured_image_url %}
+                                    {{ post.featured_image_url }}
                                 {% endif %}
-                                " alt="{{ object.title }}" class="img-fluid mb-4 rounded shadow" style="width: auto; height: auto;">
+                                " alt="{{ post.title }}" class="img-fluid mb-4 rounded shadow" style="width: auto; height: auto;">
                             </div>
                         {% endif %}
                     </div>
                     <div class="card-body">
                         <span class="badge bg-danger mb-2">BREAKING</span>
-                        <h2 class="card-title fw-bold">{{ object.title }}</h2>
-                        <p class="text-muted small">{{ object.created_date|date:"d M Y H:i" }} • Diupdate: {{ object.updated_date|date:"d M Y H:i" }}</p>
-                        <p class="card-text">{{ object.content|linebreaks }}</p>
+                        <h2 class="card-title fw-bold">{{ post.title }}</h2>
+                        <p class="text-muted small">{{ post.created_date|date:"d M Y H:i" }} • Diupdate: {{ post.updated_date|date:"d M Y H:i" }}</p>
+                        <p class="card-text">{{ post.content|linebreaks }}</p>
                     </div>
                     <a href="{% url 'post_list' %}" class="btn btn-secondary">Kembali ke Daftar</a>
-                    <a href="{% url 'post_update' object.slug %}" class="btn btn-warning">Edit</a>
-                    <a href="{% url 'post_delete' object.slug %}" class="btn btn-danger">Hapus</a>
+                    {% comment %} <a href="{% url 'post_update' object.slug %}" class="btn btn-warning">Edit</a> {% endcomment %}
+                    {% comment %} <a href="{% url 'post_delete' object.slug %}" class="btn btn-danger">Hapus</a> {% endcomment %}
                 </div>
 
                     <!-- Tambah sendiri berita lain di sini ya, copy blok card aja! -->
