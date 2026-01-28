@@ -3,28 +3,13 @@
 {% load static %}
 {% block content %}    
         <div class="row row-cols-2">
-            <div class="col-sm-8">
+            <div class="col-sm-9">
                 <!-- Breaking News / Headline Utama -->
                 <div class="card mb-5 border-0 shadow-sm">
                     <div class="row">
-                        {% if post.thumbnail_url and post.featured_image_url %}
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <img src="{{ post.thumbnail_url }}" alt="{{ post.title }}" class="img-fluid mb-4 rounded shadow">
-                            </div>
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <img src="{{ post.featured_image_url }}" alt="{{ post.title }}" class="img-fluid mb-4 rounded shadow">
-                            </div>
-                        {% elif post.thumbnail_url or post.featured_image_url %}
-                            <div class="col-sm-12 mb-3 mb-sm-0">
-                                <img src="
-                                {% if post.thumbnail_url %}
-                                    {{ post.thumbnail_url }}
-                                {% elif post.featured_image_url %}
-                                    {{ post.featured_image_url }}
-                                {% endif %}
-                                " alt="{{ post.title }}" class="img-fluid mb-4 rounded shadow" style="width: auto; height: auto;">
-                            </div>
-                        {% endif %}
+                        <div class="col-sm-12 mb-3 mb-sm-0">
+                            <img src="{{ post.featured_image_url }}" alt="{{ post.title }}" class="img-fluid mb-4 rounded shadow">
+                        </div>
                     </div>
                     <div class="card-body">
                         <span class="badge bg-danger mb-2">BREAKING</span>
@@ -41,7 +26,7 @@
                     <!-- Contoh Berita 4-7 bisa pakai gambar dari inspirasi tadi -->
 
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, natus.
                 </div>
             </div>

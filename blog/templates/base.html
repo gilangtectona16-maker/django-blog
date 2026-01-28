@@ -41,56 +41,52 @@
             }
         }
 
+        .card {
+            border: transparent
+        }
+
+        .news-card {
+            position: relative;
+            padding-bottom: 60px;
+            border: transparent
+        }
+
+        .news-card img {
+            height: auto;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .news-overlay {
+            background: rgba(0, 123, 255, 0.9); /* biru transparan */
+            bottom: -40px;
+        }
+
+        .news-card:hover img {
+            transform: scale(1.05);
+        }
+
         footer {
             background-color: #0f0f0f;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
         }
     </style>
 </head>
 <body>
 {% load static %}
     <main>
-        <div class="container my-5" style="max-width: 1000px;">
-        <!-- Headline Besar (mirip Kompas) -->
-        <div class="mb-5 text-center">
-            <h1 class="display-5 fw-bold text-primary">PORTAL BERITA BONDOWOSO</h1>
-            <p class="lead text-muted">Berita Terkini dan Terpercaya ~ Update Tiap Hari</p>
-            <hr class="my-4">
-        </div>
-        {% block content %}
-        {% endblock %}
+        {% include "container/header.html" %}
+        <div class="container my-5" style="max-width: 1200px;">
+            {% block content %}
+            {% endblock %}
         </div>
     </main>
     
 </body>
-<footer class="bg-dark text-light mt-5">
-    <div class="container-fluid text-center">
-        <div class="row py-4">
-
-            <!-- Email -->
-            <div class="col-md-4 mb-2">
-                <p class="mb-0"><i class="bi bi-envelope"></i> example@gmail.com</p>
-            </div>
-            
-            <!-- Phone -->
-            <div class="col-md-4 mb-2">
-                <p class="mb-0"><i class="bi bi-telephone"></i> +62 812-3456-7890</p>
-            </div>
-
-            <!-- Copyright -->
-            <div class="col-md-4 mb-2">
-                <h6>© Copyright</h6>
-                <p class="mb-0">2026 - Website Kamu</p>
-            </div>
-
-        </div>
-
-        <hr class="border-secondary">
-
-        <small class="text-secondary">
-        Dibuat dengan 💙 menggunakan Bootstrap
-        </small>
-    </div>
-</footer>
+{% include "container/footer.html" %}
 </html>
 
 <!-- Bootstrap JS -->

@@ -1,10 +1,13 @@
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator
 from .supabase import *
 
 def post_list(request):
     posts = fetch_posts()
+
+
     return render(request, "blog/post_base.html", {"posts": posts})
 
 def post_detail(request, unique_id):
