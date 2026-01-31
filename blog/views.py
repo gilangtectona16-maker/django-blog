@@ -1,6 +1,6 @@
 from wsgiref import types
 from django.urls import reverse_lazy
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
 from .supabase import *
