@@ -1,40 +1,25 @@
 {% extends 'base.html' %}
 
 {% load static %}
-{% block content %}    
-        <div class="row row-cols-2">
-            <div class="col-sm-9">
-                <!-- Breaking News / Headline Utama -->
-                <div class="card mb-5 border-0 shadow-sm">
-                    <div class="row">
-                        <div class="col-sm-12 mb-3 mb-sm-0">
-                            <img src="{{ post.featured_image_url }}" alt="{{ post.title }}" class="img-fluid mb-4 rounded shadow">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <span class="badge bg-danger mb-2">BREAKING</span>
-                        <h2 class="card-title fw-bold">{{ post.title }}</h2>
-                        <p class="text-muted small">{{ post.created_date|date:"d M Y H:i" }} • Diupdate: {{ post.updated_date|date:"d M Y H:i" }}</p>
-                        <p class="card-text">{{ post.content|linebreaks }}</p>
-                    </div>
-                    <a href="{% url 'post_list' %}" class="btn btn-secondary">Kembali ke Daftar</a>
-                    {% comment %} <a href="{% url 'post_update' object.slug %}" class="btn btn-warning">Edit</a> {% endcomment %}
-                    {% comment %} <a href="{% url 'post_delete' object.slug %}" class="btn btn-danger">Hapus</a> {% endcomment %}
-                </div>
-
-                    <!-- Tambah sendiri berita lain di sini ya, copy blok card aja! -->
-                    <!-- Contoh Berita 4-7 bisa pakai gambar dari inspirasi tadi -->
-
-                </div>
-                <div class="col-sm-3">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, natus.
-                </div>
-            </div>
+{% block content %}
+<!-- Breaking News / Headline Utama -->
+<div class="card mb-5 border-0 shadow-sm">
+    <div class="row">
+        <div class="col-sm-12 mb-3 mb-sm-0 text-center">
+            <img src="{{ post.featured_image_url }}" alt="{{ post.title }}" class="img-fluid mb-4 rounded shadow">
         </div>
+        </div>
+        <div class="card-body">
+            <span class="badge bg-danger mb-2">BREAKING</span>
+            <h2 class="card-title fw-bold">{{ post.title }}</h2>
+            <p class="text-muted small">{{ post.created_date|date:"d M Y H:i" }} • Diupdate: {{ post.updated_date|date:"d M Y H:i" }}</p>
+            <p class="card-text">{{ post.content|linebreaks }}</p>
+        </div>
+    <a href="{% url 'post_list' %}" class="btn btn-secondary">Kembali ke Daftar</a>
+{% comment %} <a href="{% url 'post_update' object.slug %}" class="btn btn-warning">Edit</a> {% endcomment %}
+{% comment %} <a href="{% url 'post_delete' object.slug %}" class="btn btn-danger">Hapus</a> {% endcomment %}
+</div>
 
-        <!-- Footer kecil -->
-        <footer class="text-center mt-5 pt-4 border-top fixed-bottom">
-            <p class="text-muted small">© 2026 Portal Berita Ku ~ Dibuat dengan Django & Bootstrap ♡</p>
-        </footer>
-    </div>    
+<!-- Tambah sendiri berita lain di sini ya, copy blok card aja! -->
+<!-- Contoh Berita 4-7 bisa pakai gambar dari inspirasi tadi -->
 {% endblock %}

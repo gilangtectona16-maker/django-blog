@@ -11,27 +11,11 @@
 <hr class="my-0 opacity-25">
 
 <nav class="navbar bg-body-tertiary mb-3 bg-light">
-    <div class="container d-flex flex-nowrap overflow-auto justify-content-start scrollbar-hide" style="max-width: 1250px;">
-        <button class="btn me-2">Finance</button>
-        <button class="btn me-2">Crypto</button>
-        <button class="btn me-2">Politics</button>
-        <button class="btn me-2">Social</button>
-        <button class="btn me-2">Tech</button>
-        <button class="btn me-2">Finance</button>
-        <button class="btn me-2">Crypto</button>
-        <button class="btn me-2">Politics</button>
-        <button class="btn me-2">Social</button>
-        <button class="btn me-2">Tech</button>
-        <button class="btn me-2">Finance</button>
-        <button class="btn me-2">Crypto</button>
-        <button class="btn me-2">Politics</button>
-        <button class="btn me-2">Social</button>
-        <button class="btn me-2">Tech</button>
-        <button class="btn me-2">Finance</button>
-        <button class="btn me-2">Crypto</button>
-        <button class="btn me-2">Politics</button>
-        <button class="btn me-2">Social</button>
-        <button class="btn me-2">Tech</button>
+    <div class="container d-flex flex-nowrap overflow-auto justify-content-start scrollbar-hide" style="max-width: 1200px;">
+        <button class="btn me-2 btn-link" disabled>#</button>
+        {% for tag in group_tags %}
+            <a href="#"><button class="btn me-2 btn-link fs-6">{{ tag }}</button></a>
+        {% endfor %}
     </div>
 </nav>
 

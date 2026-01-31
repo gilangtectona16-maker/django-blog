@@ -1,67 +1,75 @@
 {% extends 'base.html' %}
 
+{% load static %}
 {% block content %}
-  <div class="row">
-    <div class="col-sm-9">
-      <div class="masonry">
-        {% for post in posts %}
-            <div class="card shadow-sm mb-3">
-              <img src="{{ post.thumbnail_url }}" class="img-fluid rounded mb-2">
-              <div class="card-img-overlay fs-4">
-                <span class="badge text-bg-danger" style="background-color: black;">{{ post.types }}</span>
-              </div>
-              <div class="card-img-overlay fs-4 text-end">
-                <span class="badge text-bg-primary" style="background-color: black;">{{ post.category }}</span>
-              </div>
-              <div class="card-body">
-                <div class="text-center">
-                  <h5 class="card-title">{{ post.title }}</h5>
-                  <a href="{% url 'post_detail' post.unique_id %}" class="btn btn-primary">Read More</a>
-                </div>
-                <div class="mt-2">
-                  <p>
-                    {% for g in post.group %}
-                      #{{ g }}
-                    {% endfor %}
-                  </p>
-                </div>
-              </div>
-              <div class="card-footer text-muted">
-                <p class="fs-6">Diupdate {{ post.updated_at }}</p>
-              </div>
+  <div class="position-relative">
+    <!-- hotline blog -->
+    <span class="badge bg-danger position-absolute top-0 start-0 m-2">HOT</span>
+    <div id="carouselSlider" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        {% for b in berita_panas %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="3000">
+            <img src="{{ b.thumbnail_url }}" class="d-block w-100" alt="{{ forloop.counter }}" style="width: auto; height: 300px" />
+            <div class="carousel-caption d-none d-md-block">
+              <h5>{{ b.title }}</h5>
+              <p>{{ b.description }}</p>
             </div>
+          </div>
         {% endfor %}
       </div>
-      <div class="d-grid gap-2 justify-content-center my-4">
-        <a href="">
-          <button class="btn btn-primary" type="button">
-            Load More
-          </button>
-        </a>
-      </div>
     </div>
-    <div class="col-sm-3">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, vel. Eaque dolorem provident adipisci ad illum cum dignissimos molestiae officiis, magnam sit, et obcaecati debitis expedita quisquam nemo! Dolore, laudantium?</p>
+    <!-- card masonry blog -->
+    <div class="card-grid mt-4">
+      {% for post in posts %}
+        <a href="{% url 'post_detail' post.unique_id %}">
+          <div class="card shadow-sm mb-3">
+            <img src="{{ post.thumbnail_url }}" class="img-fluid rounded mb-2" />
+            <div class="card-img-overlay fs-4">
+              <span class="badge text-bg-danger" style="background-color: black">{{ post.types }}</span>
+            </div>
+            <div class="card-img-overlay fs-4 text-end">
+              <span class="badge text-bg-primary" style="background-color: black">{{ post.category }}</span>
+            </div>
+            <div class="card-body">
+              <div class="text-center">
+                <h5 class="card-title">{{ post.title }}</h5>
+              </div>
+              <div class="mt-2">
+                <p>
+                  {% for g in post.group %}
+                    #{{ g }}
+                  {% endfor %}
+                </p>
+              </div>
+            </div>
+            <div class="card-footer text-muted">
+              <p class="fs-6">Diupdate {{ post.updated_at }}</p>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+    <div class="d-grid gap-2 justify-content-center my-4">
+      <a href=""><button class="btn btn-primary" type="button">Load More</button></a>
     </div>
   </div>
-{% endblock %}
-
-{% comment %} ini buat ngasih contoh kartu berita dengan overlay {% endcomment %}
-{% comment %} <div class="card news-card shadow-sm mb-3 text-white">
-              <img src="{{ post.thumbnail_url }}" class="card-img">
-              <div class="card-img-overlay">
-                {% for type in post.type %}
-                  <span class="badge text-bg-dark" style="background-color: black;">#{{ type }}</span>
-                {% endfor %}
-              </div>
-              <div class="card-img-overlay d-flex flex-column justify-content-end p-0">
-                <div class="news-overlay mt-2 ms-2 me-2">
-                  <div class="text-center">
-                    <h5 class="card-title">{{ post.title }}</h5>
-                    <div class="text end">
-                      <a href="{% url 'post_detail' post.unique_id %}" class="btn btn-primary">Read More</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> {% endcomment %}
+{% endblock %} {% comment %}ini buat ngasih contoh kartu berita dengan overlay{% endcomment %} {% comment %}
+<div class="card news-card shadow-sm mb-3 text-white">
+  <img src="{{ post.thumbnail_url }}" class="card-img" />
+  <div class="card-img-overlay">
+    {% for type in post.type %}
+      <span class="badge text-bg-dark" style="background-color: black">#{{ type }}</span>
+    {% endfor %}
+  </div>
+  <div class="card-img-overlay d-flex flex-column justify-content-end p-0">
+    <div class="news-overlay mt-2 ms-2 me-2">
+      <div class="text-center">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <div class="text end">
+          <a href="{% url 'post_detail' post.unique_id %}" class="btn btn-primary">Read More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endcomment %}

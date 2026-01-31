@@ -1,0 +1,20 @@
+<div style="background:transparent">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item d-flex justify-content-start align-items-center gap-3">
+      <div class="table">
+        <table class="table align-middle table-borderless">
+          <tbody>
+            {% for post in tips_posts %}
+              <tr>
+                <td class="fs-3 align-center text-danger">{{ forloop.counter }}.</td>
+                <td class="text-start">
+                  <a href="{% url 'post_detail' post.unique_id %}" class="fs-6 link-light text-decoration-none">{{ post.title }} - {{ post.content|truncatewords:5 }}</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </li>
+  </ul>
+</div>

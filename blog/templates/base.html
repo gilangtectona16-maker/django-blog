@@ -14,29 +14,28 @@
 
     {% block extra_css %}{% endblock %}
     <style>
-        .masonry {
-            column-count: 3;      /* jumlah kolom */
-            column-gap: 1rem;
+        .card-grid {
+            column-count: 12;      /* jumlah kolom */
         }
 
-        .masonry .card {
+        .card-grid .card {
             break-inside: avoid;
         }
 
         @media (max-width: 768px) {
-            .masonry {
+            .card-grid {
                 column-count: 1;
             }
         }
 
-            @media (min-width: 769px) and (max-width: 992px) {
-            .masonry {
+        @media (min-width: 769px) and (max-width: 992px) {
+            .card-grid {
                 column-count: 2;
             }
         }
 
-            @media (min-width: 993px) {
-            .masonry {
+        @media (min-width: 993px) {
+            .card-grid {
                 column-count: 3;
             }
         }
@@ -65,7 +64,7 @@
         .news-card:hover img {
             transform: scale(1.05);
         }
-
+        
         footer {
             background-color: #0f0f0f;
         }
@@ -73,18 +72,38 @@
         .scrollbar-hide::-webkit-scrollbar {
             display: none;
         }
+
+        .btn {
+            border: none;
+            text-decoration: none;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .btn .hover {
+            background-color: transparent;
+            transition: background-color 0.0s ease;
+        }
     </style>
 </head>
 <body>
 {% load static %}
     <main>
         {% include "container/header.html" %}
-        <div class="container my-5" style="max-width: 1200px;">
-            {% block content %}
-            {% endblock %}
+        <div class="container my-5" 
+        style="max-width: 1200px"
+        >
+            <div class="row">
+                <div class="col-sm-9">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+                <div class="col-sm-3">
+                    {% include 'container/side_blog.html' %}
+                </div>
+            </div>
         </div>
-    </main>
-    
+    </main> 
 </body>
 {% include "container/footer.html" %}
 </html>
