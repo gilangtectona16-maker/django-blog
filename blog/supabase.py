@@ -1,3 +1,4 @@
+from unicodedata import category
 import requests
 from django.conf import settings
 from django.core.cache import cache
@@ -43,23 +44,6 @@ def fetch_post(uid):
     data = r.json()
     return data[0] if data else None
 
-# def fetch_post(uid):
-#     cache_key = f"post_{uid}"
-#     data = cache.get(cache_key)
-    
-#     if not data:
-#         r = requests.get(
-#             BASE_URL,
-#             headers=HEADERS,
-#             params={"unique_id": f"eq.{uid}", "select": "*"},
-#             timeout=TIMEOUT
-#         )
-#         r.raise_for_status()
-#         result = r.json()
-#         data = result[0] if result else None
-#         cache.set(cache_key, data, CACHE_TTL)
-#     return data[0] if data else None
-
 def fetch_posts_by_types(types, limit=5):
     cache_key = f"posts_type_{types}_{limit}"
     data = cache.get(cache_key)
@@ -86,3 +70,40 @@ def fetch_latest_posts(limit=5):
         cache.set(cache_key, data, CACHE_TTL)
 
     return data
+
+# class SupabasePostByGroupService:
+#     def __init__(self):
+#         self.base_url = BASE_URL
+#         self.headers = HEADERS
+
+#     def _get(self, params):
+#         r = requests.get(
+#             self.base_url,
+#             headers=self.headers,
+#             params=params,
+#             timeout=10
+#         )
+#         r.raise_for_status()
+#         return r.json()
+
+#     # 🔥 INI YANG KAMU MAU: group jsonb
+#     def fetch_posts_by_group(self, group_name, limit=15, offset=0):
+#         params = {
+#             "select": "*",
+#             "groups": f'cs.{{"{group_name}"}}',
+#             "limit": limit,
+#             "offset": offset,
+#             "order": "created_at.desc"
+#         }
+#         return self._get(params)
+
+#     # 🔥 khusus carousel berita panas per group (opsional)
+#     def fetch_hot_posts_by_group(self, group_name, limit=5):
+#         params = {
+#             "select": "*",
+#             "groups": f'cs.{{"{group_name}"}}',
+#             "types": 'eq."berita panas"',
+#             "limit": limit,
+#             "order": "created_at.desc"
+#         }
+#         return self._get(params)

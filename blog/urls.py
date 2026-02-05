@@ -5,8 +5,9 @@ from .views import *
 
 urlpatterns = [
     path('', post_list, name='post_list'),
-    
     path("read/<str:unique_id>/", post_detail, name="post_detail"),
+    
+    path("group/<str:group_name>/", group_page, name="group_page"),
 ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

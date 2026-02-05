@@ -12,9 +12,9 @@
 
 <nav class="navbar bg-body-tertiary mb-3 bg-light">
     <div class="container d-flex flex-nowrap overflow-auto justify-content-start scrollbar-hide" style="max-width: 1200px;">
-        <button class="btn me-2 btn-link" disabled>#</button>
+        <a href="{% url 'post_list' %}"><button class="btn me-2 btn-link">#</button></a>        
         {% for tag in group_tags %}
-            <a href="#"><button class="btn me-2 btn-link fs-6">{{ tag }}</button></a>
+            <a href="{% url 'group_page' tag %}"><button class="btn me-2 btn-link fs-6">{{ tag|title }}</button></a>
         {% endfor %}
     </div>
 </nav>

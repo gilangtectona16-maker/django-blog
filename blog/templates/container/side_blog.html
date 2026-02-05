@@ -4,9 +4,12 @@
       <div class="table">
         <table class="table align-middle table-borderless">
           <tbody>
+            <h4 class="title-line" style="border-color: darkblue;">
+              Tips
+            </h4>
             {% for post in tips_posts %}
               <tr>
-                <td class="fs-3 align-center text-danger">{{ forloop.counter }}.</td>
+                <td class="fs-3 align-center text-primary">{{ forloop.counter }}.</td>
                 <td class="text-start">
                   <a href="{% url 'post_detail' post.unique_id %}" class="fs-6 link-light text-decoration-none">{{ post.title }} - {{ post.content|truncatewords:5 }}</a>
                 </td>

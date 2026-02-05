@@ -5,7 +5,7 @@
   <div class="position-relative">
     <!-- hotline blog -->
     <span class="badge bg-danger position-absolute top-0 start-0 m-2">HOT</span>
-    <div id="carouselSlider" class="carousel slide" data-bs-ride="carousel">
+    <div id="carouselSlider" class="carousel slide mb-4" data-bs-ride="carousel">
       <div class="carousel-inner">
         {% for b in berita_panas %}
           <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="3000">
@@ -19,6 +19,7 @@
       </div>
     </div>
     <!-- card masonry blog -->
+    <h4 class="title-line" style="border-color: darkblue;">Tips</h4>
     <div class="card-grid mt-4">
       {% for post in posts %}
         <a href="{% url 'post_detail' post.unique_id %}">
@@ -36,7 +37,7 @@
               </div>
               <div class="mt-2">
                 <p>
-                  {% for g in post.group %}
+                  {% for g in post.groups %}
                     #{{ g }}
                   {% endfor %}
                 </p>
