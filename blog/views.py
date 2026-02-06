@@ -9,9 +9,6 @@ from .supabase import *
 def post_list(request):
     posts = fetch_posts()
     
-    for p in posts:
-        print(p["unique_id"], p.get("slug"))
-    
     return render(request, "blog/post_base.html", {"posts": posts})
 
 def post_detail(request, unique_id, slug):
