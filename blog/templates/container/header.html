@@ -14,7 +14,9 @@
     <div class="container d-flex flex-nowrap overflow-auto justify-content-start scrollbar-hide" style="max-width: 1200px;">
         <a href="{% url 'post_list' %}"><button class="btn me-2 btn-link">#</button></a>        
         {% for tag in group_tags %}
-            <a href="{% url 'group_page' tag %}"><button class="btn me-2 btn-link fs-6">{{ tag|title }}</button></a>
+            <a href="
+            {% comment %} {% url 'group_page' tag %} {% endcomment %}
+            "><button class="btn me-2 btn-link fs-6">{{ tag|title }}</button></a>
         {% endfor %}
     </div>
 </nav>

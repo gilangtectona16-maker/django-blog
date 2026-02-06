@@ -1,4 +1,5 @@
 from unicodedata import category
+from django.utils.text import slugify
 import requests
 from django.conf import settings
 from django.core.cache import cache
@@ -15,7 +16,7 @@ BASE_URL = f"{settings.SUPABASE_URL}/rest/v1/posts"
 session = requests.Session()
 session.headers.update(HEADERS)
 
-TIMEOUT = 2  # detik
+TIMEOUT = 2  # detikz
 CACHE_TTL = 60    # cache 60 detik
 
 def fetch_posts():
@@ -31,6 +32,11 @@ def fetch_posts():
         )
         r.raise_for_status()
         data = r.json()
+        
+        for post in data:
+            if not post.get("slug"):
+                post["slug"] = slugify(post.get("title", ""))
+                
         cache.set(cache_key, data, CACHE_TTL)
     return data
 
@@ -42,7 +48,16 @@ def fetch_post(uid):
     )
     r.raise_for_status()
     data = r.json()
-    return data[0] if data else None
+
+    if not data:
+        return None
+
+    post = data[0]
+
+    if not post.get("slug"):
+        post["slug"] = slugify(post.get("title", ""))
+
+    return post
 
 def fetch_posts_by_types(types, limit=5):
     cache_key = f"posts_type_{types}_{limit}"

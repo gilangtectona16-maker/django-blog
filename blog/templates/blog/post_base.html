@@ -22,7 +22,7 @@
     <h4 class="title-line" style="border-color: darkblue;">Tips</h4>
     <div class="card-grid mt-4">
       {% for post in posts %}
-        <a href="{% url 'post_detail' post.unique_id %}">
+        <a href="{% url 'post_detail' post.unique_id post.slug %}">
           <div class="card shadow-sm mb-3">
             <img src="{{ post.thumbnail_url }}" class="img-fluid rounded mb-2" />
             <div class="card-img-overlay fs-4">

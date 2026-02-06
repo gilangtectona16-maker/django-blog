@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect, Http404
 from django.core.paginator import Paginator
 from .supabase import *
     
@@ -8,12 +8,25 @@ from .supabase import *
 
 def post_list(request):
     posts = fetch_posts()
+    
+    for p in posts:
+        print(p["unique_id"], p.get("slug"))
+    
     return render(request, "blog/post_base.html", {"posts": posts})
 
-def post_detail(request, unique_id):
+def post_detail(request, unique_id, slug):
     post = fetch_post(unique_id)
+
     if not post:
-        return render(request, "404.html", status=404)
+        raise Http404("Post not found")
+
+    # ambil slug asli dari data supabase
+    real_slug = post.get("slug")
+
+    # kalau slug di URL tidak sama dengan slug asli → redirect ke URL yang benar
+    if slug != real_slug:
+        return redirect("post_detail", unique_id=unique_id, slug=real_slug)
+
     return render(request, "blog/post_detail.html", {"post": post})
     
 def group_page(request, group_name):

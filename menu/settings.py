@@ -36,6 +36,9 @@ ALLOWED_HOSTS = [
     'gilang.pythonanywhere.com',
     'localhost',
     '127.0.0.1',
+    '76.13.193.172',
+    'bondowosotodate.com',
+    'www.bondowosotodate.com',
 ]
 
 

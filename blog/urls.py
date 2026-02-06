@@ -5,7 +5,7 @@ from .views import *
 
 urlpatterns = [
     path('', post_list, name='post_list'),
-    path("read/<str:unique_id>/", post_detail, name="post_detail"),
+    path("read/<str:unique_id>/<str:slug>/", post_detail, name="post_detail"),
     
     path("group/<str:group_name>/", group_page, name="group_page"),
 ] 
